@@ -16,6 +16,7 @@ namespace NTWICAB
 
         public static void Show()
         {
+            Console.Clear();
             InterfaceCommons.WriteBanner();
             var mainMenuPrompt = new SelectionPrompt<MenuOption>()
                 .Title("What would you like to do? ✏️")
