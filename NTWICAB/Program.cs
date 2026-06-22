@@ -9,7 +9,10 @@ namespace NTWICAB
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.Unicode;
-            MainMenu.Show();
+            while (true)
+            {
+                MainMenu.Show();
+            }
         }
     }
 }

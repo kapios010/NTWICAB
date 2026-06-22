@@ -7,32 +7,51 @@ namespace NTWICAB
 {
     internal static class MainMenu
     {
+        private static void InitializeFileStream(string path)
+        {
+            FileStream file = File.OpenRead(path);
+            StreamViewer.Show(file);
+        }
+
         public static readonly MenuOption[] options = {
-            new MenuOption { name = "📺 Tune in to a Remote Stream", call = () => {throw new NotImplementedException(); } },
-            new MenuOption { name = "🎞️ Stream from File", call = () => { throw new NotImplementedException(); } },
-            new MenuOption { name = "📡 Broadcast", call = () => { throw new NotImplementedException(); } },
-            new MenuOption { name = "❎ Quit", call = () => { AnsiConsole.MarkupLine("See ya! 👋"); Environment.Exit(0); } }
+            new MenuOption { Name = "📺 Tune in to a Remote Stream", Call = () => {throw new NotImplementedException(); } },
+            new MenuOption { Name = "🎞️ Stream from File", Call = () => { InitializeFileStream(FileSelect.Show()); } },
+            new MenuOption { Name = "📡 Broadcast", Call = () => { throw new NotImplementedException(); } },
+            new MenuOption { Name = "❎ Quit", Call = () => { AnsiConsole.MarkupLine("See ya! 👋"); Environment.Exit(0); } }
         };
 
-        public static void Show()
+        public static async void Show()
         {
             Console.Clear();
-            InterfaceCommons.WriteBanner();
+            Commons.WriteBanner();
             var mainMenuPrompt = new SelectionPrompt<MenuOption>()
                 .Title("What would you like to do? ✏️")
-                .UseConverter(option => $"{option.name}")
+                .UseConverter(option => $"{option.Name}")
                 .AddChoices(options)
                 .HighlightStyle(Style.Parse("black on chartreuse1"));
             mainMenuPrompt.DisabledStyle = Style.Parse("chartreuse1 dim");
             MenuOption result = AnsiConsole.Prompt(mainMenuPrompt);
+            AnsiConsole.MarkupLine($"[dim chartreuse1]> {result.Name}[/]\n");
             try
             {
-                result.call.Invoke();
+                result.Call.Invoke();
             }
             catch (Exception e)
             {
-                AnsiConsole.WriteException(e);
-
+                if (e is NotImplementedException)
+                {
+                    AnsiConsole.Status()
+                        .Spinner(Spinner.Known.Monkey)
+                        .Start("Not implemented", ctx =>
+                        {
+                            Thread.Sleep(3000);
+                        });
+                }
+                else
+                {
+                    AnsiConsole.WriteException(e);
+                    Thread.Sleep(3000);
+                }
             }
         }
     }

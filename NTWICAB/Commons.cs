@@ -7,11 +7,11 @@ namespace NTWICAB
 {
     public struct MenuOption
     {
-        public string name;
-        public Action call;
+        public string Name;
+        public Action Call;
     }
 
-    internal static class InterfaceCommons
+    internal static class Commons
     {
         public static void WriteBanner()
         {
