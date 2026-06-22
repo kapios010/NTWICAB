@@ -123,7 +123,7 @@ namespace NTWICAB
                         {
                             stream.ReadExactly(buffer, 0, 2);
                         }
-                        catch (Exception e) { break; }
+                        catch { break; }
                     }
                     
                     layout["Footer"].Update(new Markup("Stream ended. Press any key to exit."));
