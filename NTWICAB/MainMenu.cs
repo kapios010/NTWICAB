@@ -12,7 +12,7 @@ namespace NTWICAB
             FileStream file = File.OpenRead(path);
             try
             {
-            StreamViewer.Show(file);
+                StreamViewer.Show(file);
             } catch (Exception e)
             {
                 file.Close();
