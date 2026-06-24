@@ -10,7 +10,14 @@ namespace NTWICAB
         private static void InitializeFileStream(string path)
         {
             FileStream file = File.OpenRead(path);
+            try
+            {
             StreamViewer.Show(file);
+            } catch (Exception e)
+            {
+                file.Close();
+                throw;
+            }
         }
 
         public static readonly MenuOption[] options = {
