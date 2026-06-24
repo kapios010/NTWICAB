@@ -44,7 +44,7 @@ Also the beam scans progressively, so from left to right in each row, top to bot
 
 After the header, we pair every two bytes into a segment. The first 4 bits of the segment determine its function, and the rest provides essentially the function arguments.
 
-In functions marked with 🎨, the rest of the bits acts as the values of RGB, each 4 bits.
+In functions marked with 🎨, the rest of the bits acts as the values of RGB, each 4 bits (example: cursor is `#000000`, command is `1ABC`, new cursor will be `#AABBCC`).
 
 First byte | Function   | Explanation | Rest of the bits
 -----------|------------|-------------|-------------------
