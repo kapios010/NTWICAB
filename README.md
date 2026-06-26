@@ -34,7 +34,7 @@ Also the beam scans progressively, so from left to right in each row, top to bot
 - `n` byte(s) for name in Unicode UTF-16 LE
 - `m` = 1 byte for amount of bytes in author
 - `m` byte(s) for author in Unicode UTF-16 LE
-- 1 byte of network bug flag ( `0x80 = 0b10000000` - network bug included )
+- 1 byte of network bug flag ( `0x80 = 0b10000000` - network bug included, anything else (preferably `0x00`) - bug not included )
   - If flag is true, next 128 bytes are Unicode characters making up the network bug (4 rows of 16 chars)
 - 1 byte of width
 - 1 byte of height
